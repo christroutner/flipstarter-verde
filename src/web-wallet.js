@@ -139,7 +139,12 @@ class Wallet {
       console.log(`data: ${data}`)
       const options = {
         method: 'POST',
-        body: data
+        body: data,
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
       }
       const server = 'https://log.psfoundation.info/log'
       const result = await fetch(server, options)
