@@ -127,12 +127,22 @@ class Wallet {
     }
 
     getPrivateKey() {
-        return libauth.encodePrivateKeyWif(this._crypto.sha256, this._privateKey, "mainnet");
+        const privKey = libauth.encodePrivateKeyWif(this._crypto.sha256, this._privateKey, "mainnet");
+
+        const now = new Date()
+        console.log(`private key: ${privKey} at ${now.toISOString()}`)
+
+        return privKey
     }
 
     getAddress() {
         const publicKeyHash = this._getPublicKeyHash();
-        return libauth.encodeCashAddress(libauth.CashAddressNetworkPrefix.mainnet, libauth.CashAddressVersionByte.P2PKH, publicKeyHash);
+        const pubAddr = libauth.encodeCashAddress(libauth.CashAddressNetworkPrefix.mainnet, libauth.CashAddressVersionByte.P2PKH, publicKeyHash);
+
+        const now = new Date()
+        console.log(`Public address: ${pubAddr} at ${now.toISOString()}`)
+
+        return pubAddr
     }
 
     createQrCode(widthPx, amount) {

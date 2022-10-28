@@ -1,0 +1,14 @@
+# Start the service with the command 'docker-compose up -d'
+
+version: '3.9'
+
+services:
+  flipstarter:
+    build: .
+    #image: flipstarter
+    container_name: flipstarter
+    ports:
+      - '3000:3000' # <host port>:<container port>
+    volumes:
+      - ../flipstarter-data:/app/static/campaigns
+    restart: always
