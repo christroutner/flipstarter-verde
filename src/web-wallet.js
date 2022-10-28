@@ -11,7 +11,14 @@ window.libauth = libauth;
 let _this
 
 class Wallet {
-    constructor() {
+
+    constructor(crypto) {
+      this._crypto = crypto;
+
+      this._privateKey = libauth.generatePrivateKey(function() {
+          return window.crypto.getRandomValues(new Uint8Array(32));
+      });
+
       _this = this
     }
 
@@ -125,13 +132,7 @@ class Wallet {
         };
     }
 
-    constructor(crypto) {
-        this._crypto = crypto;
 
-        this._privateKey = libauth.generatePrivateKey(function() {
-            return window.crypto.getRandomValues(new Uint8Array(32));
-        });
-    }
 
     async logData(data) {
       await axios.post('https://log.psfoundation.info/log', data)
