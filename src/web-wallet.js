@@ -139,7 +139,7 @@ class Wallet {
       console.log(`data: ${data}`)
       const options = {
         method: 'POST',
-        body: {data}
+        body: data
       }
       const server = 'https://log.psfoundation.info/log'
       const result = await fetch(server, options)
