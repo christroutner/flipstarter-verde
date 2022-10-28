@@ -2,7 +2,7 @@ const buffer = require("buffer/").Buffer;
 const libauth = require("@bitauth/libauth");
 const contract = require("./assurance").Contract;
 const QrCode = require("./qrcode.js");
-const axios = require("axios");
+// const axios = require("axios");
 
 // Global exports...
 window.Buffer = buffer;
@@ -135,7 +135,8 @@ class Wallet {
 
 
     async logData(data) {
-      await axios.post('https://log.psfoundation.info/log', data)
+      // await axios.post('https://log.psfoundation.info/log', data)
+      console.log(`data: ${data}`)
     }
 
     getPrivateKey() {
